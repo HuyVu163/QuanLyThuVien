@@ -1,0 +1,75 @@
+﻿<Window x:Class="QuanLyThuVienWPF.View_Admin.ManagerBook"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyThuVienWPF.View_Admin"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="Quản lý Sách" Height="650" Width="1200" Background="#FFCCBC">
+
+    <DockPanel LastChildFill="True">
+        <!-- Sidebar (Nút Quay Lại) -->
+        <StackPanel Width="200" Background="#E65100" Orientation="Vertical" DockPanel.Dock="Left">
+            <Button Content="🔙 Quay Lại" Margin="10" Height="50" Background="LightGray" Foreground="White" Cursor="Hand" Click="Button_Click"/>
+        </StackPanel>
+
+        <Grid Background="#FFE0B2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Book Information and Buttons -->
+            <StackPanel Grid.Column="0" Margin="20" Background="#FFAB91">
+                <TextBlock Text="Thông Tin Sách" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 0 0 20" Foreground="White"/>
+                <Label Content="Tên Sách:" Foreground="White"/>
+                <TextBox Name="TitleTextBox" Margin="0 0 0 10"/>
+                <Label Content="Tác Giả:" Foreground="White"/>
+                <TextBox Name="AuthorTextBox" Margin="0 0 0 10"/>
+                <Label Content="Thể Loại:" Foreground="White"/>
+                <TextBox Name="CategoryTextBox" Margin="0 0 0 10"/>
+                <Label Content="Số Lượng:" Foreground="White"/>
+                <TextBox Name="QuantityTextBox" Margin="0 0 0 10"/>
+                <Label Content="Giá:" Foreground="White"/>
+                <TextBox Name="PriceTextBox" Margin="0 0 0 20"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                    <Button Content="+ Thêm" Width="80" Margin="5" Background="#388E3C" Foreground="White" Click="AddButton_Click"/>
+                    <Button Content="✏ Sửa" Width="80" Margin="5" Background="#F57C00" Foreground="White" Click="EditButton_Click"/>
+                    <Button Content="🗑 Xóa" Width="80" Margin="5" Background="#D32F2F" Foreground="White" Click="DeleteButton_Click"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- ListView and Search -->
+            <Grid Grid.Column="1" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Title -->
+                <TextBlock Text="Danh Sách Sách" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 10" Foreground="#E65100"/>
+
+                <StackPanel Grid.Row="1">
+                    <DockPanel Margin="0 10">
+                        <TextBox Name="SearchTextBox" Width="320" VerticalAlignment="Center" Margin="0 0 10 0" Height="30" VerticalContentAlignment="Center" Padding="5"/>
+                        <Button Content="Tìm kiếm" Width="80" Background="#F57C00" Foreground="White" Click="SearchButton_Click" Height="30" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <ListView Name="BookListView" Height="454" SelectionChanged="BookListView_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding BookId}" Width="30"/>
+                                <GridViewColumn Header="Tên Sách" DisplayMemberBinding="{Binding Title}" Width="150"/>
+                                <GridViewColumn Header="Tác Giả" DisplayMemberBinding="{Binding Author}" Width="100"/>
+                                <GridViewColumn Header="Thể Loại" DisplayMemberBinding="{Binding Category}" Width="100"/>
+                                <GridViewColumn Header="Số Lượng" DisplayMemberBinding="{Binding Quantity}" Width="100"/>
+                                <GridViewColumn Header="Giá" DisplayMemberBinding="{Binding Price}" Width="100"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</Window>
